@@ -28,7 +28,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <TextField fx:id="GuessBox" layoutX="117.0" layoutY="178.0" />
+                  <TextField      layoutX="117.0" layoutY="178.0"/>
                   <Label layoutX="67.0" layoutY="245.0" text="Bulls" />
                   <Label layoutX="262.0" layoutY="245.0" text="Cows" />
                   <Label fx:id="BullsNum" layoutX="104.0" layoutY="245.0" text="0" />
