@@ -1,5 +1,17 @@
 package sample;
 
+import java.lang.Object;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import com.sun.media.jfxmedia.events.NewFrameEvent;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -13,6 +25,12 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ExecutionException;
+
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 import javafx.scene.shape.Circle;
@@ -23,64 +41,28 @@ import javax.swing.*;
 
 public class Main extends Application {
 
-    //Main Run = new Main();
-    Stage Rules = new Stage();
-    Stage window = new Stage();
-    Stage Scoreboard = new Stage();
-    @FXML
-    TextField GuessBox;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Rules = primaryStage;
         int Width = 640;
         int Hieght = 350;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
-        Rules.setTitle("Rules!");
-        Rules.setScene(new Scene(root, Width, Hieght));
-        Rules.show();
+        primaryStage.setTitle("Rules!");
+        primaryStage.setScene(new Scene(root, Width, Hieght));
+        primaryStage.show();
 
     }
-    public static void main(String[] args) {
+
+
+    public static void main(String[] args) throws InterruptedException {
         launch(args);
 
+
     }
 
-    //methods to be used in controller
 
-    public String GenerateRandomGuess(){
-        String Name;
-        Name = " ";
-        return Name;
-    }
 
-    public void generateNewStages() throws IOException {
-
-        window.setTitle("Guess the Animal I am Thinking of!");
-        window.setScene(new Scene(FXMLLoader.load(getClass().getResource("SecondFrame.fxml")), 640, 400));
-        window.show();
-
-        Scoreboard.setTitle("Scoreboard");
-        Scoreboard.setScene(new Scene(FXMLLoader.load(getClass().getResource("Scoreboard.fxml")), 640, 400));
-        Scoreboard.show();
-    }
-
-    public void makeGuess(){
-        int runOnce = 1;
-        while (runOnce == 1) {
-            int keeprunning = 1;
-            while (keeprunning == 1) {
-                if (GuessBox == null) {
-                    JOptionPane.showMessageDialog(null, "Error: Please enter a guess!", "Error", 2);
-                    keeprunning = 0;
-                } else {
-                    keeprunning = 0;
-                    JOptionPane.showMessageDialog(null, "success", "", 1);
-                }
-            }
-            runOnce--;
-        }
-    }
 }
 

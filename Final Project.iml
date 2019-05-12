@@ -17,5 +17,17 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../MYSQLthing/mysql-connector-java-5.1.47" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../MYSQLthing/mysql-connector-java-5.1.47/src" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/../MYSQLthing/mysql-connector-java-5.1.47" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
