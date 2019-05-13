@@ -9,9 +9,10 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -23,7 +24,8 @@
          <children>
             <AnchorPane prefHeight="400.0" prefWidth="600.0">
                <children>
-                  <Label layoutX="23.0" layoutY="14.0" prefHeight="35.0" prefWidth="183.0" text="Scoreboard">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ac182e" height="35.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="605.0" />
+                  <Label layoutX="23.0" layoutY="14.0" prefHeight="35.0" prefWidth="183.0" text="Scoreboard" textFill="#c3eee8">
                      <font>
                         <Font size="24.0" />
                      </font>
