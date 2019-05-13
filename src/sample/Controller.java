@@ -37,6 +37,7 @@ public class Controller {
     public Label scoreID;
     public Label guessID;
     public Label Timer;
+    public Button playButton;
     @FXML
     public Button checkerButton;
     @FXML
@@ -47,6 +48,7 @@ public class Controller {
 
     @FXML
     public void Start(ActionEvent actionEvent) throws IOException, InterruptedException {
+        playButton.setVisible(false);
         Run.generateNewStages();
     }
 
@@ -57,6 +59,7 @@ public class Controller {
                 checkerButton.setText(contentList[0]);
                 BullsNum.setText(contentList[1]);
                 CowsNum.setText(contentList[2]);
+                descriptionText.setText(contentList[3]);
                 scoreID.setText(contentList[5]);
                 guessID.setText(contentList[4]);
 

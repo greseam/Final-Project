@@ -25,7 +25,9 @@ import java.sql.Statement;
 import javafx.scene.control.*;
 import javax.swing.*;
 import java.io.IOException;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class methods {
@@ -56,18 +58,19 @@ public class methods {
         window.show();
     }
 
-    public String makeGuess(String guess) throws IOException, InterruptedException {//////BUGS HERE
+    public String makeGuess(String guess) throws IOException, InterruptedException {
         boolean victory = false;
         boolean hasRun;
         String content = "";
         String buttonContent = "Make Guess";
-        String gameDescript="Can you Guess Correctly?";
         System.out.println("Initializing");
         String rightAnwser = setListVar(guessLimit);
+        rightAnwser = rightAnwser.toLowerCase();
+        String gameDescript;
+        gameDescript = setGameDescription(rightAnwser);
 
         if (guessLimit == -1){
-            gameDescript = setGameDescription(rightAnwser);
-            guessLimit = 5;
+            guessLimit = 8;
         }else if (guessLimit > 0){
             System.out.println(rightAnwser.length());
             hasRun = false;
@@ -179,6 +182,14 @@ public class methods {
         catch (Exception e){
 
         }
+        try{
+            String[] TextList = Text.split(" ");
+            Text = Text.split(" ")[TextList.length - 1];
+        }
+        catch (Exception e){
+
+        }
+
         return Text;
     }
     public String setGameDescription(String correctGuess){
@@ -197,25 +208,47 @@ public class methods {
         int[] arr1 = new int[10];
         int[] arr2 = new int[10];
         if (secret.length() == guess.length()) {
-            for (int i = 0; i < secret.length(); i++) {
+            HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+
+            //check bull
+            for(int i=0; i<secret.length(); i++){
                 char c1 = secret.charAt(i);
                 char c2 = guess.charAt(i);
-                System.out.println(i);
-                if (c1 == c2)
+
+                if(c1==c2){
                     countBull++;
-                else {
-                    arr1[c1 - '0']++;
-                    arr2[c2 - '0']++;
+                }else{
+                    if(map.containsKey(c1)){
+                        int freq = map.get(c1);
+                        freq++;
+                        map.put(c1, freq);
+                    }else{
+                        map.put(c1, 1);
+                    }
                 }
             }
 
-            for (int i = 0; i < 10; i++) {
-                countCow += Math.min(arr1[i], arr2[i]);
+            //check cow
+            for(int i=0; i<secret.length(); i++){
+                char c1 = secret.charAt(i);
+                char c2 = guess.charAt(i);
 
+                if(c1!=c2){
+                    if(map.containsKey(c2)){
+                        countCow++;
+                        if(map.get(c2)==1){
+                            map.remove(c2);
+                        }else{
+                            int freq = map.get(c2);
+                            freq--;
+                            map.put(c2, freq);
+                        }
+                    }
+                }
             }
         }else{
             JOptionPane.showMessageDialog(null, "the length of your guess wasn't long or short enough", "Notice", 2);
-            guessLimit++;
+
         }
         return countBull+","+countCow;
     }

@@ -16,7 +16,7 @@
         <children>
           <AnchorPane fx:id="MainFrame" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
-                  <Button id="Play_Button" layoutX="278.0" layoutY="298.0" mnemonicParsing="false" onAction="#Start" text="Play" />
+                  <Button id="Play_Button" fx:id="playButton" layoutX="278.0" layoutY="298.0" mnemonicParsing="false" onAction="#Start" text="Play" />
                   <Label layoutX="156.0" layoutY="14.0" prefHeight="54.0" prefWidth="320.0" text="Welcome to, Guess the Animal I Am Thinking of!!!" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
