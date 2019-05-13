@@ -70,40 +70,41 @@ public class methods {
         String gameDescript;
         gameDescript = setGameDescription(rightAnwser);
 
-        if (guessLimit == -1){
+        if (guessLimit <= -1){
             guessLimit = 8;
-        }else if (guessLimit > 0){
+        }else if (guessLimit >= 0){
             System.out.println(rightAnwser.length());
             hasRun = false;
-            while (guessLimit > 0 && hasRun == false) {
+            while (guessLimit >= 0 && hasRun == false) {
                 System.out.println("Checking");
                 //checks guess
 
                 //not empty so that its positive their is a value to check
                 if (!guess.isEmpty()) {
                     System.out.println("Word is not null");
-
-                    if (rightAnwser.equals(guess)) {
-                        System.out.println("Victory");
-                        JOptionPane.showMessageDialog(null,"Congratulations you figured out the animal i was thinking of!\nPress the Make Guess button to figure the next animal im thinking of.","Victory!!!",1);
-                        victory = true;
-                        countBull= rightAnwser.length();
-                        countCow= rightAnwser.length();
-                        score = score + (guessLimit+ 1) * 100;
-                        buttonContent = "Generate Next Word";
-                        System.out.println("Score: "+score);
-                        guessLimit = 0;
-                    } else {
-                        hintList = getHint(rightAnwser,guess).split(",");
-                        countCow = Integer.valueOf(hintList[1]);
-                        countBull = Integer.valueOf(hintList[0]);
-                        //string comparison methods
-                        System.out.println("Were running down town");
+                    if (guess.length()!=rightAnwser.length()){
+                        JOptionPane.showMessageDialog(null, "the length of your guess wasn't long or short enough", "Notice", 2);
+                        break;
+                    }else{
+                        if (rightAnwser.equals(guess)) {
+                            System.out.println("Victory");
+                            JOptionPane.showMessageDialog(null,"Congratulations you figured out the animal i was thinking of!\nPress the Make Guess button to figure the next animal im thinking of.","Victory!!!",1);
+                            victory = true;
+                            countBull= rightAnwser.length();
+                            countCow= rightAnwser.length();
+                            score = score + (guessLimit+ 1) * 100;
+                            buttonContent = "Generate Next Word";
+                            System.out.println("Score: "+score);
+                            guessLimit = 0;
+                        } else {
+                            hintList = getHint(rightAnwser,guess).split(",");
+                            countCow = Integer.valueOf(hintList[1]);
+                            countBull = Integer.valueOf(hintList[0]);
+                            System.out.println("Were running down town");
                             System.out.println(getHint(rightAnwser,guess));
-
-
-
+                        }
                     }
+
                 } else if (guess.isEmpty()) {
                     System.out.println("Null!");
                     JOptionPane.showMessageDialog(null, "Error: Please enter a guess!", "Error", 2);
@@ -112,20 +113,22 @@ public class methods {
                     System.out.println("??");
 
                 }
-                hasRun = true;
-                guessLimit--;
+
                 if (guessLimit == 0 && victory == false) {
                     JOptionPane.showMessageDialog(null, "you have run out of guess for this word.\n-100 Points\nThinking of a new animal!", "Notice", 2);
-                    guessLimit = -1;
+                    score = score - 100;
+                    buttonContent = "Generate Next Word";
+                    guessLimit = 0;
                 }
+                guessLimit--;
+                hasRun = true;
 
             }
         }else {
         }
         System.out.println("Score: " +score);
         System.out.println(guessLimit);
-        System.out.println(content);
-        content = buttonContent +","+ countBull +","+ countCow +","+gameDescript+","+guessLimit+","+score; //+","+Roundtimer(5)
+        content = buttonContent +","+ countBull +","+ countCow +","+gameDescript+","+guessLimit+","+score+","+victory+","+guess;
         return content;
     }
     public int Roundtimer(int minutes) throws InterruptedException {
@@ -210,7 +213,7 @@ public class methods {
         countCow =0;
         int[] arr1 = new int[10];
         int[] arr2 = new int[10];
-        if (secret.length() == guess.length()) {
+
             HashMap<Character, Integer> map = new HashMap<Character, Integer>();
 
             //check bull
@@ -249,12 +252,10 @@ public class methods {
                     }
                 }
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "the length of your guess wasn't long or short enough", "Notice", 2);
 
-        }
         return countBull+","+countCow;
     }
+    //history methods
 
     //scoreboard and SQL methods
     public void updateScoreboard(){
