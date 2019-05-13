@@ -88,7 +88,7 @@ public class methods {
                     }else{
                         if (rightAnwser.equals(guess)) {
                             System.out.println("Victory");
-                            JOptionPane.showMessageDialog(null,"Congratulations you figured out the animal i was thinking of!\nPress the Make Guess button to figure the next animal im thinking of.","Victory!!!",1);
+                            JOptionPane.showMessageDialog(null,"Congratulations you figured out the animal i was thinking of!\nPress the button to get the next one.","Victory!!!",1);
                             victory = true;
                             countBull= rightAnwser.length();
                             countCow= rightAnwser.length();
