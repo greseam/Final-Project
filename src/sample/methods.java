@@ -38,11 +38,11 @@ public class methods {
     ArrayList<String> commonNames = new ArrayList<String>();
     static Thread thread = new Thread();
     String CorrectGuess;
-    int guessLimit = -1; //set to negative to initalize the first correct value
-    int score = 0;
-    int countBull=0;
-    int countCow =0;
-    String[] hintList;
+    int guessLimit = -1; //set to negative to initalize the first correct value(right answer)
+    int score = 0;//set to 0 as player shouldn't start with points
+    int countBull=0;//initial number of correct char in the correct position
+    int countCow =0;//initial number of correct char in wrong position
+    String[] hintList;//list used for easier format
 
     //methods to be used in controller
 
@@ -56,11 +56,12 @@ public class methods {
         Scoreboard.setScene(new Scene(FXMLLoader.load(getClass().getResource("Scoreboard.fxml")), 640, 400));
         Scoreboard.show();
         window.show();
-    }
+    }//generates the scoreboard and game
 
+    //this is run every time the user guesses, and regenerates new words each round (after "guessLimit")
     public String makeGuess(String guess) throws IOException, InterruptedException {
         boolean victory = false;
-        boolean hasRun;
+        boolean hasRun;//used to break the while loop
         String content = "";
         String buttonContent = "Make Guess";
         System.out.println("Initializing");
@@ -76,7 +77,9 @@ public class methods {
             hasRun = false;
             while (guessLimit > 0 && hasRun == false) {
                 System.out.println("Checking");
-                //check guess
+                //checks guess
+
+                //not empty so that its positive their is a value to check
                 if (!guess.isEmpty()) {
                     System.out.println("Word is not null");
 
@@ -140,18 +143,18 @@ public class methods {
         Random rand = new Random();
         int randomNum = rand.nextInt((max - min) + 1) + min;
         return randomNum;
-    }
+    }//function used to randomly acquire a number and used in selection of animals
 
     public String setListVar(int guessLimit) throws IOException {
         Document doc = Jsoup.connect("https://lib2.colostate.edu/wildlife/atoz.php?sortby=genus_species&letter=all").get();
 
-        System.out.println(doc.title());
+        //System.out.println(doc.title());
         Elements group = doc.select("table.names");
         Elements animal =  group.select("td");
         for(int i = 0; i < animal.size(); i +=2)
         {
             try {
-                commonNames.add(cleaner(animal.get(i).text())); //.replace("(unidentified)","")
+                commonNames.add(cleaner(animal.get(i).text()));
             }
             catch (Exception e){
                 commonNames.add(animal.get(i).text());
@@ -191,7 +194,7 @@ public class methods {
         }
 
         return Text;
-    }
+    }//cleaner is used to format the incoming strings and change them into the common names of the animals
     public String setGameDescription(String correctGuess){
         int nameLength = 0;
         nameLength = correctGuess.length();
@@ -252,6 +255,8 @@ public class methods {
         }
         return countBull+","+countCow;
     }
+
+    //scoreboard and SQL methods
     public void updateScoreboard(){
         //put both SQL methods in here
     }

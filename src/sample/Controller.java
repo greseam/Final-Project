@@ -38,20 +38,20 @@ public class Controller {
     public Label guessID;
     public Label Timer;
     public Button playButton;
-    @FXML
     public Button checkerButton;
-    @FXML
     private TextField guessTextBox;
 
     methods Run = new methods();
-     String[] contentList;
+     String[] contentList;//format helper
 
     @FXML
+    //play button and rules
     public void Start(ActionEvent actionEvent) throws IOException, InterruptedException {
         playButton.setVisible(false);
         Run.generateNewStages();
     }
 
+    //event handler for the game guess button
     public void Makeguess(ActionEvent actionEvent) throws IOException, InterruptedException {
                 String content = null;
                 content = Run.makeGuess(guessTextBox.getText());
@@ -64,7 +64,7 @@ public class Controller {
                 guessID.setText(contentList[4]);
 
     }
-
+    //event handler methods for scoreboard
     public void clearList(ActionEvent actionEvent) {
 
     }
