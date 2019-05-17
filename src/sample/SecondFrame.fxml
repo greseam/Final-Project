@@ -65,11 +65,11 @@
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label layoutX="86.0" layoutY="359.0" text="Guesses remaining:">
+                  <Label layoutX="44.0" layoutY="359.0" text="Guesses remaining:">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="guessID" layoutX="223.0" layoutY="359.0" text="0">
+                  <Label fx:id="guessID" layoutX="167.0" layoutY="359.0" text="0">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
@@ -77,6 +77,16 @@
                   <Line endX="586.0" layoutX="14.0" layoutY="19.0" startX="-14.0" />
                   <Line endX="199.0" layoutX="402.0" layoutY="63.0" startX="-2.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ac182e" height="20.0" layoutX="-7.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="610.0" />
+                  <Label layoutX="209.0" layoutY="359.0" text="Round">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="roundNum" layoutX="258.0" layoutY="359.0" text="0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
          </children></VBox>
    </children>

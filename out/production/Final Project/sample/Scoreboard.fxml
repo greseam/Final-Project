@@ -30,7 +30,7 @@
                      </font>
                   </Label>
                   <Button fx:id="clearButton" layoutX="46.0" layoutY="355.0" mnemonicParsing="false" onAction="#clearList" text="Clear all" />
-                  <Button fx:id="saveButton" layoutX="277.0" layoutY="355.0" mnemonicParsing="false" onAction="#addPlayer" text="Save Current score" />
+                  <Button fx:id="saveButton" layoutX="277.0" layoutY="355.0" mnemonicParsing="false" onAction="#addPlayer" text="Update Scoreboard" />
                   <ListView fx:id="nameList" layoutX="46.0" layoutY="79.0" prefHeight="257.0" prefWidth="159.0" />
                   <ListView fx:id="scoreIDlist" layoutX="205.0" layoutY="79.0" prefHeight="257.0" prefWidth="183.0" />
                   <ListView fx:id="posList" layoutX="388.0" layoutY="79.0" prefHeight="257.0" prefWidth="175.0" />

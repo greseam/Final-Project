@@ -42,13 +42,11 @@ import javax.swing.*;
 public class Main extends Application {
 
 
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         int Width = 640;
         int Hieght = 350;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-
         primaryStage.setTitle("Rules!");
         primaryStage.setScene(new Scene(root, Width, Hieght));
         primaryStage.show();

@@ -30,6 +30,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
+
 import javafx.scene.control.ListView;
 
 
@@ -51,6 +53,7 @@ public class Controller {
     public ListView nameList;
     public ListView scoreIDlist;
     public ListView posList;
+    public Label roundNum;
     @FXML
     private TextField guessTextBox;
 
@@ -67,12 +70,17 @@ public class Controller {
     ListProperty<String> nameProperty = new SimpleListProperty<>();
     ListProperty<String> posProperty = new SimpleListProperty<>();
 
+    ObservableList<Player> playerObjects = FXCollections.observableArrayList();
+    ObservableList<Player> playerObjectsNew = FXCollections.observableArrayList();
+
+
 
     @FXML
     //play button and rules
-    public void Start(ActionEvent actionEvent) throws IOException, InterruptedException {
+    public void Start(ActionEvent actionEvent) throws IOException, InterruptedException, SQLException, ClassNotFoundException {
         playButton.setVisible(false);
         Run.generateNewStages();
+        playerObjects =  Run.retreiveScoreBoardData(null);
     }
 
     //event handler for the game guess button
@@ -86,8 +94,13 @@ public class Controller {
                 descriptionText.setText(contentList[3]);
                 scoreID.setText(contentList[5]);
                 guessID.setText(contentList[4]);
+                roundNum.setText(String.valueOf(Integer.valueOf(contentList[9])));
+                if (Integer.valueOf(contentList[9]) < 0){roundNum.setText("Waiting on next game"); checkerButton.setText("Start new game");}
                 try {
-                    historyList.add(contentList[7]+"  B>> "+contentList[1]+"  C>> "+contentList[2]);
+                playerObjectsNew.add(new Player(contentList[8], Integer.valueOf(contentList[5])));
+                }catch (Exception e){}
+                try {
+                historyList.add(contentList[7]+"  B>> "+contentList[1]+"  C>> "+contentList[2]);
                 }catch (Exception e){
                 }
                 listProperty.set(FXCollections.observableArrayList(historyList));
@@ -98,31 +111,47 @@ public class Controller {
         return Integer.valueOf(contentList[5]);
     }
     //event handler methods for scoreboard
-    public void clearList(ActionEvent actionEvent) {
-        clearData(initials,nameList);
-        clearData(scoreArray,scoreIDlist);
-        clearData(positions,posList);
-        Position = 0;
-        data.clear();
-        //add a removeall from database method
+    public void clearList(ActionEvent actionEvent) throws SQLException {
+        int selectedOption;
+        selectedOption = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to delete ALL data in the Scoreboard?",
+                "Choose",
+                JOptionPane.YES_NO_OPTION);
+        if (selectedOption == JOptionPane.YES_OPTION) {
+            clearData(initials, nameList);
+            clearData(scoreArray, scoreIDlist);
+            clearData(positions, posList);
+            Position = 0;
+            data.clear();
+            //add a removeall from database method
+            Run.RemoveAllFromDatabase(null, null);
+        }
+        else { JOptionPane.showMessageDialog(null,"No action taken\nReturning to Scoreboard!");}
     }
 
 
 
-    public void addPlayer(ActionEvent actionEvent) throws IOException, InterruptedException {
-        //add method that adds current score and prompts for initials
-        int finalScore = Integer.valueOf(Run.makeGuess(null,false));
-
-        Position =1;
-        String initials1 = JOptionPane.showInputDialog(null,"please enter your initials","Initials",3);
-        for (int i = 0; i < data.size(); i++) {
+    public void addPlayer(ActionEvent actionEvent) throws IOException, InterruptedException, SQLException, ClassNotFoundException {
+        playerObjects =  Run.retreiveScoreBoardData(null).sorted(Comparator.comparing(Player::returnScore).reversed());
+        if (playerObjects.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Data base is empty\nPlease play the game to add a new player");
+        }
+        playerObjects.addAll(playerObjectsNew);
+        clearData(initials,nameList);
+        clearData(scoreArray,scoreIDlist);
+        clearData(positions,posList);
+        Position = 1;
+        for (int i = 0; i < playerObjects.size(); i++) {
+            setupData(String.valueOf(Position),positions,posList,posProperty);
             Position++;
         }
-        Player player = new Player(initials1,finalScore);
-        data.add(player);
-        setupData(player.returnInitials(),initials,nameList,nameProperty);
-        setupData(String.valueOf(player.returnScore()),scoreArray,scoreIDlist,scoreProperty);
-        setupData(String.valueOf(Position),positions,posList,posProperty);
+        System.out.println(playerObjects.size());
+        playerObjects.sorted(Comparator.comparing(Player::returnScore));
+        for (Player name:playerObjects) {
+            setupData(name.returnInitials(),initials,nameList,nameProperty);
+            setupData(String.valueOf(name.returnScore()),scoreArray,scoreIDlist,scoreProperty);
+        }
+
 
         //foreach player set position to last position + 1
 
@@ -141,5 +170,6 @@ public class Controller {
         listProperty.set(FXCollections.observableArrayList(List));
         View.itemsProperty().bind(listProperty);
     }
+
 
 }

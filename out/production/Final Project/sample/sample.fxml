@@ -17,8 +17,8 @@
         <children>
           <AnchorPane fx:id="MainFrame" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bcbec0" height="204.0" layoutX="57.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="521.0" />
-                  <Button id="Play_Button" fx:id="playButton" layoutX="257.0" layoutY="285.0" mnemonicParsing="false" onAction="#Start" prefHeight="39.0" prefWidth="108.0" text="Play">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bcbec0" height="217.0" layoutX="33.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="572.0" />
+                  <Button id="Play_Button" fx:id="playButton" layoutX="257.0" layoutY="297.0" mnemonicParsing="false" onAction="#Start" prefHeight="39.0" prefWidth="108.0" text="Play">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
@@ -27,21 +27,21 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="67.0" layoutY="68.0" prefHeight="113.0" prefWidth="506.0" text="Here you will try to guess the animal I am thinking of. The rules are that you will enter an animal name, guess in all lowercase, after guessing I will tell you how close you are by telling you the number of cows and bulls." textAlignment="CENTER" wrapText="true">
+                  <Label layoutX="40.0" layoutY="68.0" prefHeight="140.0" prefWidth="559.0" text="Here you will try to guess the animal I am thinking of. The rules are that you will enter an animal name and after guessing I will tell you how close you are by telling you the number of cows and bulls. Your goal is to score as many points as possible within the round limit." textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label layoutX="145.0" layoutY="189.0" text="Bulls - you have a correct letter in the correct position">
+                  <Label layoutX="145.0" layoutY="198.0" text="Bulls - you have a correct letter in the correct position">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="131.0" layoutY="209.0" text="Cows - you have a correct letter but it's in the wrong position">
+                  <Label layoutX="131.0" layoutY="218.0" text="Cows - you have a correct letter but it's in the wrong position">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="102.0" layoutY="241.0" text="Your score will optionally be saved later in the scoreboard">
+                  <Label layoutX="101.0" layoutY="248.0" text="Your score will optionally be saved later to the scoreboard">
                      <font>
                         <Font size="18.0" />
                      </font>
